@@ -10,18 +10,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
 
         # Add custom claims
+        #token['fav_color'] = user.fav_color
         return token
-
-
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    def validate(self, attrs):
-        # The default result (access/refresh tokens)
-        data = super(CustomTokenObtainPairSerializer, self).validate(attrs)
-        # Custom data you want to include
-        data.update({'user': self.user.username})
-        data.update({'id': self.user.id})
-        # and everything else you want to send in the response
-        return data
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -32,15 +22,11 @@ class CustomUserSerializer(serializers.ModelSerializer):
         required=True
     )
     username = serializers.CharField(required=True)
-    password = serializers.CharField(
-        min_length=8, required=True)
-    workshop = serializers.StringRelatedField()
-    area = serializers.StringRelatedField()
 
     class Meta:
         model = CustomUser
         fields = ('email', 'username', 'password', 'id', 'name',
-                  'surname')
+                  'surname', 'second_name')
         #extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -51,3 +37,21 @@ class CustomUserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
+
+class CustomUserChangeProfileSerializer(serializers.ModelSerializer):
+    """
+    Currently unused in preference of the below.
+    """
+    email = serializers.EmailField(
+        required=True
+    )
+    username = serializers.CharField(required=True)
+    name = serializers.CharField(required=True)
+    surname = serializers.CharField(required=True)
+    second_name = serializers.CharField(required=True)
+    
+    class Meta:
+        model = CustomUser
+        fields = ('email', 'username', 'name',
+                  'surname', 'second_name')

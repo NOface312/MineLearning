@@ -1,8 +1,17 @@
 import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
-import Login from "./auth/login";
-import Signup from "./auth/signup";
+
+
+import Login from "./auth/authorization/login";
+import Signup from "./auth/authorization/signup";
+
+
 import Test_Component from "./test/test_component";
+import News from "./news/news";
+
+
+import { Access_Token_Route } from './../routes/private_auth';
+
 
 class App extends Component {
 
@@ -12,7 +21,9 @@ class App extends Component {
                 <main>
                     <Switch>
 
-                        <Route exact path={"/test/"} component={Test_Component} />
+                        
+                        <Access_Token_Route exact path={"/news/"} component={News} />
+                        <Access_Token_Route exact path={"/test/"} component={Test_Component} />
 
                         <Route exact path={"/login/"} component={ Login } />
                         <Route exact path={"/signup/"} component={ Signup } />
@@ -23,4 +34,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default App; 
