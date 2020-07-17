@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
-import axiosInstance from "../../axios/axiosApi";
+import axiosInstance from "../../axios/axiosAPI";
 
 class Test_Component extends Component {
     constructor(props) {
