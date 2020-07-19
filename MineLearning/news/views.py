@@ -16,7 +16,7 @@ from rest_framework import status, filters, generics
 
 
 class New_API_DETAIL(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
     def get_object(self, pk):
         try:
             return New.objects.get(pk=pk)
@@ -31,7 +31,7 @@ class New_API_DETAIL(APIView):
 
 
 class New_API_LIST(generics.ListAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
     queryset = New.objects.all()
     serializer_class = NewSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
