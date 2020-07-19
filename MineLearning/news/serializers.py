@@ -6,7 +6,7 @@ class NewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = New
-        fields = ('title', 'description', 'preview', 'poster', 'release_date')
+        fields = '__all__'
 
     def create(self, validated_data):
         return New.objects.create(**validated_data)

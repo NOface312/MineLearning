@@ -9,6 +9,8 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('api/', include('authentication.urls')),
     path('api/', include('news.urls')),
+    path('api/', include('lessons.urls')),
+    path('api/', include('courses.urls')),
     path('', include('frontend.urls')),
 ]
 
