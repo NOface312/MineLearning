@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
+import News_Component from "../news/news"
+import PanelPage from "./panels/panels"
 
-class Stub_Component extends Component {
+class Landing_Component extends Component {
     constructor(props) {
         super(props);
         this.state;
@@ -10,10 +12,11 @@ class Stub_Component extends Component {
     render() {
         return (
             <div>
-                Some text
+               <PanelPage />
+               <News_Component /> 
             </div>
         )
     }
 }
 
-export default Stub_Component;
+export default Landing_Component;
