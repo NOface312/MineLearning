@@ -23,7 +23,7 @@ class News_Component extends Component {
                       <div className="line"></div>
                       <div className="picdiv"><img className="pic" src={post.poster} /></div>
                   </div>
-                    
+
                     </>
                 ))
             })
