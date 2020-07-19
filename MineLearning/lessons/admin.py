@@ -6,7 +6,7 @@ from .models import Lesson
 
 
 class LessonAdminForm(forms.ModelForm):
-    #content = forms.CharField(widget=CKEditorUploadingWidget())
+    description = forms.CharField(widget=CKEditorUploadingWidget())
 
     class Meta:
         model = Lesson
