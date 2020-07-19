@@ -1,6 +1,7 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 from .models import CustomUser
+from django.contrib.auth.password_validation import validate_password
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -39,13 +40,11 @@ class CustomUserSerializer(serializers.ModelSerializer):
         return instance
 
 
-class CustomUserChangeProfileSerializer(serializers.ModelSerializer):
+class CustomUserChangeDataSerializer(serializers.ModelSerializer):
     """
     Currently unused in preference of the below.
     """
-    email = serializers.EmailField(
-        required=True
-    )
+    email = serializers.EmailField(required=True)
     username = serializers.CharField(required=True)
     name = serializers.CharField(required=True)
     surname = serializers.CharField(required=True)
@@ -53,5 +52,26 @@ class CustomUserChangeProfileSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = CustomUser
-        fields = ('email', 'username', 'name',
-                  'surname', 'second_name')
+        fields = ('username', 'name',
+                  'surname', 'second_name', "email")
+
+    def create(self, validated_data):
+        instance = self.Meta.model(**validated_data)
+        instance.save()
+        return instance
+
+
+class CustomUserChangePasswordSerializer(serializers.ModelSerializer):
+    """
+    Serializer for password change endpoint.
+    """
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ('old_password', 'new_password')
+
+    def validate_new_password(self, value):
+        validate_password(value)
+        return value

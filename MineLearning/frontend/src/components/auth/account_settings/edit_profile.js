@@ -1,54 +1,69 @@
 import React, { Component } from "react";
-import axiosInstance from "./../../../axios/axiosApi";
+import axiosInstance from "./../../../axios/axiosAPI";
 import { Link } from "react-router-dom";
+import { GetUserData, ChangeUserData } from "../../../services/api/user/edit/edit_service";
 
-class Signup extends Component {
+class Edit_Profile_Component extends Component {
     constructor(props) {
         super(props);
         this.state = {
             username: "",
-            password: "",
-            email: "",
             name: "",
             surname: "",
             second_name: "",
-            errors: {}
+            email: ""
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleGetUserData = this.handleGetUserData.bind(this);
     }
 
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    async handleSubmit(event) {
+    handleSubmit(event) {
         event.preventDefault();
-        try {
-            const response = await axiosInstance.post('/auth/user/create/', {
-                username: this.state.username,
-                email: this.state.email,
-                password: this.state.password,
-                name: this.state.name,
-                surname: this.state.surname,
-                second_name: this.state.second_name,
-            });
-            this.props.history.push("/login/");
-            return response;
-        } catch (error) {
-            console.log(error.stack);
+        let options = {
+            username: this.state.username,
+            email: this.state.email,
+            name: this.state.name,
+            surname: this.state.surname,
+            second_name: this.state.second_name,
+        };
+        ChangeUserData(options).then(response => {
             this.setState({
-                errors: error.response.data
-            });
-        }
+                username: response.data.username,
+                name: response.data.name,
+                surname: response.data.surname,
+                second_name: response.data.second_name,
+                email: response.data.email,
+            })
+        })
+    }
+
+    handleGetUserData() {
+        GetUserData().then(response => {
+            this.setState({
+                username: response.data.username,
+                name: response.data.name,
+                surname: response.data.surname,
+                second_name: response.data.second_name,
+                email: response.data.email,
+            })
+        })
+    }
+
+    componentDidMount() {
+        this.handleGetUserData();
     }
 
     render() {
         return (
             <div className="simple-login-container">
                 <form className="form" onSubmit={this.handleSubmit}>
-                    <h2>Регистрация</h2>
+                    <h2>Изменить</h2>
                     <div className="row">
                         <div className="col-md-12 form-group">
                             <input name="name" type="text" placeholder="Имя" className="form-control" value={this.state.name} onChange={this.handleChange} />
@@ -76,23 +91,12 @@ class Signup extends Component {
                     </div>
                     <div className="row">
                         <div className="col-md-12 form-group">
-                            <input name="password" type="password" placeholder="Пароль" className="form-control" value={this.state.password} onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-12 form-group">
-                            <input name="password2" type="password" placeholder="Повторите пароль" className="form-control" />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-12 form-group">
                             <input type="submit" className="btn btn-block btn-login" />
                         </div>
                     </div>
                     <div className="row">
-                        <label>Есть учётная запись?</label>
                         <div className="col-md-12">
-                            <Link to="/login/">Войти</Link>
+                            <Link to="/login/">Сохранить</Link>
                         </div>
                     </div>
                 </form>
@@ -101,4 +105,4 @@ class Signup extends Component {
     }
 }
 
-export default Signup;
+export default Edit_Profile_Component;
