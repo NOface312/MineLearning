@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axiosInstance from "./../../../axios/axiosApi";
+import axiosInstance from "./../../../axios/axiosAPI";
 import { Link } from "react-router-dom";
 
 class Signup extends Component {
