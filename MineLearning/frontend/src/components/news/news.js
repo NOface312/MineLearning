@@ -87,8 +87,13 @@ class News_Component extends Component {
           // this will re render the view with new data
           this.setState({
             news: nws.map((post, i) => (
-              <><div>{post.title}</div>
-              <div>{post.preview}</div>
+              <>
+              <div className="block">
+                  <div className="title"><h4>{post.title}</h4></div>
+                <div className="text"><h5>{post.preview}</h5></div>
+                <div className="line"></div>
+            </div>
+              
               </>
             ))
           });
@@ -101,7 +106,9 @@ class News_Component extends Component {
         return (
           <div>
             <ul className="list-group list-group-flush">
+            
             <div className="news" >
+                <div className="newsblock"><h2>Новости</h2></div>
                 {this.state.news}
             </div>
             </ul>
