@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import axiosInstance from "./../../../axios/axiosApi";
 import { Link } from "react-router-dom";
+import { SingUp } from './../../../services/api/user/auth/auth_service';
 
-class Signup extends Component {
+class Signup_Component extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,23 +25,17 @@ class Signup extends Component {
 
     async handleSubmit(event) {
         event.preventDefault();
-        try {
-            const response = await axiosInstance.post('/auth/user/create/', {
-                username: this.state.username,
-                email: this.state.email,
-                password: this.state.password,
-                name: this.state.name,
-                surname: this.state.surname,
-                second_name: this.state.second_name,
-            });
+        let options = {
+            username : this.state.username,
+            password : this.state.password,
+            email : this.state.email,
+            name : this.state.name,
+            surname : this.state.surname,
+            second_name : this.state.second_name,
+        };
+        SingUp(options).then(response => {
             this.props.history.push("/login/");
-            return response;
-        } catch (error) {
-            console.log(error.stack);
-            this.setState({
-                errors: error.response.data
-            });
-        }
+        })
     }
 
     render() {
@@ -101,4 +95,4 @@ class Signup extends Component {
     }
 }
 
-export default Signup;
+export default Signup_Component;

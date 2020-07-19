@@ -1,53 +1,30 @@
 import React, { Component } from "react";
-import axiosInstance from "./../../../axios/axiosApi";
 import { Redirect, Route, Link } from "react-router-dom";
 import "./../css/login.css";
+import { Login } from './../../../services/api/user/auth/auth_service'
 
-class Login extends Component {
+class Login_Component extends Component {
     constructor(props) {
         super(props);
         this.state = { username: "", password: ""};
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleSubmitWThen = this.handleSubmitWThen.bind(this);
     }
 
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    handleSubmitWThen(event) {
+    handleSubmit(event) {
         event.preventDefault();
-        axiosInstance.post('/auth/token/obtain/', {
+        let options = {
             username: this.state.username,
             password: this.state.password
-        }).then(
-            result => {
-                axiosInstance.defaults.headers['Authorization'] = "JWT " + result.data.access;
-                localStorage.setItem('access_token', result.data.access);
-                localStorage.setItem('refresh_token', result.data.refresh);
-            }
-        ).catch(error => {
-            throw error;
-        })
-    }
-
-    async handleSubmit(event) {
-        event.preventDefault();
-        try {
-            const response = await axiosInstance.post('/auth/token/obtain/', {
-                username: this.state.username,
-                password: this.state.password
-            });
-            axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
-            localStorage.setItem('access_token', response.data.access);
-            localStorage.setItem('refresh_token', response.data.refresh);
+        };
+        Login(options).then(response => {
             this.props.history.push("/");
-            return response;
-        } catch (error) {
-            throw error;
-        }
+        })
     }
 
     render() {
@@ -81,4 +58,4 @@ class Login extends Component {
         )
     }
 }
-export default Login;
+export default Login_Component;

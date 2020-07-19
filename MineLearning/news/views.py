@@ -7,12 +7,16 @@ from .models import *
 from .serializers import *
 from random import randint
 import time
+from django.http import Http404
+import jwt
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import status, filters, generics
+
+
 
 
 class New_API_DETAIL(APIView):
-    permission_classes = (permissions.AllowAny,)
-    authentication_classes = ()
-
+    permission_classes = (permissions.IsAuthenticated,)
     def get_object(self, pk):
         try:
             return New.objects.get(pk=pk)
@@ -26,11 +30,10 @@ class New_API_DETAIL(APIView):
         return Response(serializer.data)
 
 
-class New_API_LIST(APIView):
-    permission_classes = (permissions.AllowAny,)
-    authentication_classes = ()
-
-    def get(self, request):
-        new = New.objects.all()
-        serializer = NewSerializer(new, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+class New_API_LIST(generics.ListAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = New.objects.all()
+    serializer_class = NewSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['=title']
+    ordering_fields = '__all__'
