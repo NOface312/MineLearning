@@ -1,27 +1,6 @@
-img{
+.crs{
     width: 60%;
-    height: 60%; 
-}
-
-.panel1{
-    margin-left: auto;
-    text-align: center;
+    height: 60%;
     margin-right: auto;
-    transition: "all 1s ease-in"
-}
-
-.panel2{
     margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-
-    transition: "all 1s ease-in"
-}
-
-.panel3{
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-
-    transition: "all 1s ease-in"
 }

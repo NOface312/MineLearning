@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
-import axiosInstance from "../../axios/axiosApi";
 import { GetNews, GetNew } from './../../services/api/news/news_service';
 
 class News_Api_Example_Component extends Component {
