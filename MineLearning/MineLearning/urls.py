@@ -8,9 +8,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('api/', include('authentication.urls')),
-    path('api/', include('news.urls')),
-    path('api/', include('lessons.urls')),
-    path('api/', include('courses.urls')),
+    path('api/news/', include('news.urls')),
+    path('api/lessons/', include('lessons.urls')),
+    path('api/courses/', include('courses.urls')),
+    path('api/forum/', include('forums.urls')),
+    path('api/thread/', include('threads.urls')),
+    path('api/post/', include('posts.urls')),
     path('', include('frontend.urls')),
 ]
 

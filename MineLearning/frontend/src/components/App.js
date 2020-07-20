@@ -14,7 +14,6 @@ import Landing_Component from "./landing/landing"
 
 //Profile Pages
 import Edit_Profile_Component from "./auth/account_settings/edit_profile";
-import Edit_Password_Component from "./auth/account_settings/edit_password";
 import Test_Component from "./test/test_component";
 
 //TEST PAGES
@@ -44,7 +43,6 @@ class App extends Component {
                                 <Route exact path={"/"} component={Landing_Component} />
 
                                 <Access_Token_Route exact path={"/account/edit/data/"} component={Edit_Profile_Component} />
-                                <Access_Token_Route exact path={"/account/edit/password/"} component={Edit_Password_Component} />
 
                                 <Access_Token_Route exact path={"/test/lesson/"} component={Lessons_Api_Example_Component} />
                                 <Access_Token_Route exact path={"/test/course/"} component={Courses_Api_Example_Component} />

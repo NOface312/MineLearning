@@ -40,16 +40,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #Tools and some API stuff
+
     'django_json_widget',
     'ckeditor',
     'ckeditor_uploader',
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt.token_blacklist',
+
+    #My apps
+
     'authentication',
     'news',
     'courses',
     'lessons',
+    'forums',
+    'threads',
+    'posts',
     'frontend',
 ]
 
@@ -158,6 +167,20 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),  #
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.ScopedRateThrottle',
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'create_user': '3/hour',
+        'create_post': '3/min',
+        'create_thread': '3/hour',
+        'edit_user': '3/min',
+        'login': '5/min',
+        'anon': '60/min',
+        'user': '120/min'
+    }
 }
 
 SIMPLE_JWT = {

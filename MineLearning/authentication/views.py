@@ -5,11 +5,28 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import *
-from .serializers import *
 from django.conf import settings
 from django.http import Http404
+from .permissions import IsOwnerOrAdminOrReadOnly
+from rest_framework import generics, views
 
+from .models import CustomUser
+
+
+from .serializers import (
+    UserCreateSerializer,
+    UserDetailSerializer,
+    UserListSerializer,
+    UserUpdateSerializer,
+    MyTokenObtainPairSerializer
+)
+
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticated,
+    IsAdminUser,
+    IsAuthenticatedOrReadOnly,
+)
 
 
 
@@ -24,7 +41,57 @@ class TEST_API_LIST(APIView):
         json = {"hello": "world"}
         return Response(json, status=status.HTTP_201_CREATED)
 
-class CustomUserCreate(APIView):
+
+class UserCreateAPIView(generics.CreateAPIView):
+    serializer_class = UserCreateSerializer
+    queryset = CustomUser.objects.all()
+    permission_classes = [AllowAny]
+    throttle_scope = 'create_user'
+
+
+class UserDetailAPIView(generics.RetrieveAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserDetailSerializer
+    lookup_field = 'username'
+    permission_classes = [AllowAny]
+
+
+class UserDeleteAPIView(generics.DestroyAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserDetailSerializer
+    lookup_field = 'username'
+    permission_classes = [IsOwnerOrAdminOrReadOnly]
+
+
+class UserUpdateAPIView(generics.UpdateAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserUpdateSerializer
+    lookup_field = 'username'
+    permission_classes = [AllowAny]
+    throttle_scope = 'edit_user'
+
+
+class UserListAPIView(generics.ListAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserListSerializer
+    permission_classes = [AllowAny]
+
+
+class CurrentUserDataAPIView(APIView):
+    def get_object(self):
+        try:
+            print(self.request.user)
+            return self.request.user
+        except:
+            raise Http404
+
+    def get(self, request):
+        user = CustomUser.objects.get(username=request.user)
+        serializer = UserDetailSerializer(user)
+        print(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+"""class CustomUserCreate(APIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = ()
     
@@ -81,7 +148,7 @@ class CustomUserChangePassword(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+"""
 
 class LogoutAndBlacklistRefreshTokenForUserView(APIView):
     permission_classes = (permissions.AllowAny,)

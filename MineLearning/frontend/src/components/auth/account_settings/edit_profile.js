@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axiosInstance from "./../../../axios/axiosAPI";
 import { Link } from "react-router-dom";
-import { GetUserData, ChangeUserData } from "../../../services/api/user/edit/edit_service";
+import { GetCurrentUserData, ChangeUserData } from "../../../services/api/user/edit/edit_service";
 
 class Edit_Profile_Component extends Component {
     constructor(props) {
@@ -11,12 +11,15 @@ class Edit_Profile_Component extends Component {
             name: "",
             surname: "",
             second_name: "",
-            email: ""
+            email: "",
+            bio: "",
+            new_password: "",
+            old_password: "",
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleGetUserData = this.handleGetUserData.bind(this);
+        this.handleGetCurrentUserData = this.handleGetCurrentUserData.bind(this);
     }
 
     handleChange(event) {
@@ -31,32 +34,30 @@ class Edit_Profile_Component extends Component {
             name: this.state.name,
             surname: this.state.surname,
             second_name: this.state.second_name,
+            bio: this.state.bio,
+            new_password: this.state.new_password,
+            old_password: this.state.old_password,
         };
         ChangeUserData(options).then(response => {
-            this.setState({
-                username: response.data.username,
-                name: response.data.name,
-                surname: response.data.surname,
-                second_name: response.data.second_name,
-                email: response.data.email,
-            })
+            console.log("sas");
         })
     }
 
-    handleGetUserData() {
-        GetUserData().then(response => {
+    handleGetCurrentUserData() {
+        GetCurrentUserData().then(response => {
             this.setState({
                 username: response.data.username,
                 name: response.data.name,
                 surname: response.data.surname,
                 second_name: response.data.second_name,
                 email: response.data.email,
+                bio: response.data.bio,
             })
         })
     }
 
     componentDidMount() {
-        this.handleGetUserData();
+        this.handleGetCurrentUserData();
     }
 
     render() {
@@ -87,6 +88,21 @@ class Edit_Profile_Component extends Component {
                     <div className="row">
                         <div className="col-md-12 form-group">
                             <input name="email" type="text" className="form-control" placeholder="Почта" value={this.state.email} onChange={this.handleChange} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-12 form-group">
+                            <input name="bio" type="textarea" className="form-control" placeholder="Биография" value={this.state.bio} onChange={this.handleChange} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-12 form-group">
+                            <input name="old_password" type="password" placeholder="Старый Пароль" className="form-control" value={this.state.old_password} onChange={this.handleChange} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-12 form-group">
+                            <input name="new_password" type="password" placeholder="Новый Пароль" className="form-control" value={this.state.new_password} onChange={this.handleChange} />
                         </div>
                     </div>
                     <div className="row">
