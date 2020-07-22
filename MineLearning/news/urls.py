@@ -1,9 +1,18 @@
 from django.urls import path
 from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import New_API_DETAIL, New_API_LIST
+from .views import (
+    NewCreateAPIView,
+    NewDetailAPIView,
+    NewListAPIView,
+    NewDeleteAPIView,
+    NewUpdateAPIView
+)
 
 urlpatterns = [
-    path('<int:pk>/', New_API_DETAIL.as_view(), name='get_news_detail'),
-    path('', New_API_LIST.as_view(), name='get_news_list'),
+    path('', NewListAPIView.as_view(), name='new-list'),
+    path('create/', NewCreateAPIView.as_view(), name='new-create'),
+    path('<slug:slug>/', NewDetailAPIView.as_view(), name='new-detail'),
+    path('<slug:slug>/edit/', NewUpdateAPIView.as_view(), name='new-update'),
+    path('<slug:slug>/delete/', NewDeleteAPIView.as_view(), name='new-delete'),
 ]

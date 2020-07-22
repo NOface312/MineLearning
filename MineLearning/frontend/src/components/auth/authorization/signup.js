@@ -23,7 +23,7 @@ class Signup_Component extends Component {
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    async handleSubmit(event) {
+    handleSubmit(event) {
         event.preventDefault();
         let options = {
             username : this.state.username,

@@ -69,12 +69,16 @@ class UserListSerializer(serializers.ModelSerializer):
     avatar = serializers.URLField()
     status = serializers.URLField()
     name = serializers.CharField()
+    surname = serializers.CharField()
+    second_name = serializers.CharField()
 
     class Meta:
         model = CustomUser
         fields = [
             'username',
             'name',
+            'surname',
+            'second_name',
             'email',
             'bio',
             'avatar',
@@ -100,7 +104,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
     	max_length=32,
     	allow_blank=True
     )
-    #avatar = serializers.URLField(allow_blank=True)
+    avatar = serializers.URLField(allow_blank=True)
     status = serializers.CharField(
     	allow_blank=True,
         default='',

@@ -18,23 +18,31 @@ axiosInstance.interceptors.response.use(
     error => {
         const originalRequest = error.config;
         // Prevent infinite loops early
-        if (error.response.data.toString() === "Token Broken" && originalRequest.url === 'auth/blacklist/') {
+        /*if (error.response.data.detail !== null) {
+            if (error.response.data.detail.toString() === "User not found") {
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+                axiosInstance.defaults.headers['Authorization'] = null;
+                window.location.reload();
+            } 
+        }*/
+        if (error.response.data.toString() === "Token Broken" && originalRequest.url === 'auth/blacklist/' ) {
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
             axiosInstance.defaults.headers['Authorization'] = null;
-            location.reload();
+            window.location.reload();
         }
         if (error.response.data.code === "token_not_valid" && originalRequest.url !== 'auth/token/refresh/') {
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
             axiosInstance.defaults.headers['Authorization'] = null;
-            location.reload();
+            window.location.reload();
         } 
         if (error.response.status === 400 && originalRequest.url === 'auth/token/refresh/') {
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
             axiosInstance.defaults.headers['Authorization'] = null;
-            location.reload();
+            window.location.reload();
         }
         console.log(error.response.data);
         if (error.response.data.code === "token_not_valid" &&

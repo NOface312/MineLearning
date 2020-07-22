@@ -6,7 +6,7 @@ from .models import New
 
 
 class NewAdminForm(forms.ModelForm):
-    description = forms.CharField(widget=CKEditorUploadingWidget())
+    #description = forms.CharField(widget=CKEditorUploadingWidget())
 
     class Meta:
         model = New

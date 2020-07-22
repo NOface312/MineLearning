@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect, Route, Switch, BrowserRouter } from 'react-router-dom';
 import { Access_Token_Route } from './../routes/private_auth';
+import { Admin_Route } from './../routes/admin_auth';
 
 import Footer from "./footer/Footer"
 import Header from "./header/Header"
@@ -18,7 +19,8 @@ import Test_Component from "./test/test_component";
 
 //TEST PAGES
 //News Pages
-import News_Api_Example_Component from "./news/news_api_example";
+//import News_Api_Example_Component from "./news/news_api_example";
+import News_Create_Component from './news/api_components/news_create';
 
 //Stude Pages
 import Lessons_Api_Example_Component from "./study/lessons_api_example";
@@ -44,9 +46,10 @@ class App extends Component {
 
                                 <Access_Token_Route exact path={"/account/edit/data/"} component={Edit_Profile_Component} />
 
+                                <Admin_Route exact path={"/news/create/"} component={News_Create_Component} />
+
                                 <Access_Token_Route exact path={"/test/lesson/"} component={Lessons_Api_Example_Component} />
                                 <Access_Token_Route exact path={"/test/course/"} component={Courses_Api_Example_Component} />
-                                <Access_Token_Route exact path={"/test/news/"} component={News_Api_Example_Component} />
                                 <Access_Token_Route exact path={"/test/basic/"} component={Test_Component} />
 
                                 <Route exact path={"/login/"} component={ Login_Component } />

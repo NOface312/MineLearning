@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import axiosInstance from "./../../../axios/axiosAPI";
 import { Link } from "react-router-dom";
-import { GetCurrentUserData, ChangeUserData } from "../../../services/api/user/edit/edit_service";
+import { GetUserCurrent, ChangeUser } from "../../../services/api/user/edit/edit_service";
+import Delete_User_Modal from './../../../modals/auth/delete_user_form';
 
 class Edit_Profile_Component extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ class Edit_Profile_Component extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleGetCurrentUserData = this.handleGetCurrentUserData.bind(this);
+        this.handleGetUserCurrent = this.handleGetUserCurrent.bind(this);
     }
 
     handleChange(event) {
@@ -38,13 +38,13 @@ class Edit_Profile_Component extends Component {
             new_password: this.state.new_password,
             old_password: this.state.old_password,
         };
-        ChangeUserData(options).then(response => {
-            console.log("sas");
+        ChangeUser(options).then(response => {
+            window.location.reload();
         })
     }
 
-    handleGetCurrentUserData() {
-        GetCurrentUserData().then(response => {
+    handleGetUserCurrent() {
+        GetUserCurrent().then(response => {
             this.setState({
                 username: response.data.username,
                 name: response.data.name,
@@ -57,7 +57,7 @@ class Edit_Profile_Component extends Component {
     }
 
     componentDidMount() {
-        this.handleGetCurrentUserData();
+        this.handleGetUserCurrent();
     }
 
     render() {
@@ -116,6 +116,8 @@ class Edit_Profile_Component extends Component {
                         </div>
                     </div>
                 </form>
+                <h2>Удалить пользователя</h2>
+                <Delete_User_Modal data={this.state.username} />
             </div>
         )
     }
