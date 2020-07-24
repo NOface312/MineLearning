@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { CreateNew } from '../../../services/api/news/news_service';
-import { GetUserCurrent } from './../../../services/api/user/edit/edit_service';
+import { CreateCourse } from '../../../services/api/study/courses_service';
+import { GetUserCurrent } from '../../../services/api/user/edit/edit_service';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Dropzone from 'react-dropzone';
-import { imageUploadApi } from './../../../services/api/cloud/image/imageUploader';
+import { imageUploadApi } from '../../../services/api/cloud/image/imageUploader';
 
-class News_Create_Component extends Component {
+class Courses_Create_Component extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -71,7 +71,7 @@ class News_Create_Component extends Component {
                     creator: this.state.creator,
                 };
                 console.log(options);
-                CreateNew(options).then(response => {
+                CreateCourse(options).then(response => {
                     alert("Готово!");
                 })
             })
@@ -97,7 +97,7 @@ class News_Create_Component extends Component {
         return (
             <div className="simple-login-container">
                 <form className="form" onSubmit={this.handleSubmit}>
-                    <h2>Создание новости</h2>
+                    <h2>Создание курса</h2>
                     <div className="row">
                         <div className="col-md-12 form-group">
                             <input name="slug" type="text" placeholder="Метка(для поиска в бд)" className="form-control" value={this.state.slug} onChange={this.handleChange} />
@@ -150,4 +150,4 @@ class News_Create_Component extends Component {
     }
 }
 
-export default News_Create_Component;
+export default Courses_Create_Component;

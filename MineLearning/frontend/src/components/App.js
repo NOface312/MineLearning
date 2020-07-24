@@ -17,12 +17,19 @@ import Landing_Component from "./landing/landing"
 import Edit_Profile_Component from "./auth/account_settings/edit_profile";
 import Test_Component from "./test/test_component";
 
-//TEST PAGES
 //News Pages
 //import News_Api_Example_Component from "./news/news_api_example";
 import News_Create_Component from './news/api_components/news_create';
 import News_Detail_Component from './news/api_components/news_detail';
 import News_Edit_Component from './news/api_components/news_edit';
+import News_List_Component from './news/api_components/news_list';
+
+//Courses Pages
+import Courses_Create_Component from './study/course/courses_create';
+import Courses_Detail_Component from './study/course/courses_detail';
+import Courses_Edit_Component from './study/course/courses_edit';
+import Courses_List_Component from './study/course/courses_list';
+
 
 //Stude Pages
 import Lessons_Api_Example_Component from "./study/lessons_api_example";
@@ -51,6 +58,12 @@ class App extends Component {
                                 <Admin_Route exact path={"/news/create/"} component={News_Create_Component} />
                                 <Admin_Route exact path={"/news/edit/:new"} component={News_Edit_Component} />
                                 <Route path="/news/:new" component={ News_Detail_Component } />
+                                <Route path="/news/" component={News_List_Component} />
+
+                                <Admin_Route exact path={"/courses/create/"} component={Courses_Create_Component} />
+                                <Admin_Route exact path={"/courses/edit/:course"} component={Courses_Edit_Component} />
+                                <Route path="/courses/:course" component={Courses_Detail_Component} />
+                                <Route path="/courses/" component={Courses_List_Component} />
 
                                 <Access_Token_Route exact path={"/test/lesson/"} component={Lessons_Api_Example_Component} />
                                 <Access_Token_Route exact path={"/test/course/"} component={Courses_Api_Example_Component} />

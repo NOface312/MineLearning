@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
-import "./news.css";
-import { GetNewList } from '../../../services/api/news/news_service';
+import "./courses.css";
+import { GetCourseList } from '../../../services/api/study/courses_service';
 
-class News_List_Component extends Component {
+class Courses_List_Component extends Component {
     constructor(props) {
         super(props);
         this.state = {
             news: null,
         };
-        this.handleRenderNewsBlock = this.handleRenderNewsBlock.bind(this);
+        this.handleRenderCoursesBlock = this.handleRenderCoursesBlock.bind(this);
     }
 
-    handleRenderNewsBlock() {
-        GetNewList().then(response => {
+    handleRenderCoursesBlock() {
+        GetCourseList().then(response => {
             this.setState({
                 news: response.data.map((post, i) => (
                     <>
@@ -31,7 +31,7 @@ class News_List_Component extends Component {
     }
 
     componentDidMount() {
-        this.handleRenderNewsBlock();
+        this.handleRenderCoursesBlock();
     }
 
     render() {
@@ -49,4 +49,4 @@ class News_List_Component extends Component {
     }
 }
 
-export default News_List_Component;
+export default Courses_List_Component;

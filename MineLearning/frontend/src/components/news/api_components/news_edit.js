@@ -131,7 +131,7 @@ class News_Edit_Component extends Component {
         return (
             <div className="simple-login-container">
                 <form className="form" onSubmit={this.handleSubmit}>
-                    <h2>Регистрация</h2>
+                    <h2>Редактирование новости</h2>
                     <div className="row">
                         <div className="col-md-12 form-group">
                             <input name="slug" type="text" placeholder="Метка(для поиска в бд)" className="form-control" value={this.state.slug} onChange={this.handleChange} />

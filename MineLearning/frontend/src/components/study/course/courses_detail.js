@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
-import "./news.css";
-import { GetNewDetail } from '../../../services/api/news/news_service';
+import "./courses.css";
+import { GetCourseDetail } from '../../../services/api/study/courses_service';
 
-class News_Detail_Component extends Component {
+class Courses_Detail_Component extends Component {
     constructor(props) {
         super(props);
         this.state = {
             new: null,
         };
-        this.handleRenderNew = this.handleRenderNew.bind(this);
+        this.handleRenderCourse = this.handleRenderCourse.bind(this);
     }
 
-    handleRenderNew(slug) {
-        GetNewDetail(slug).then(response => {
+    handleRenderCourse(slug) {
+        GetCourseDetail(slug).then(response => {
             this.setState({
                 new: 
                     <>
@@ -31,13 +31,14 @@ class News_Detail_Component extends Component {
     }
 
     componentDidMount() {
-        this.handleRenderNew(this.props.match.params.new);
+        this.handleRenderCourse(this.props.match.params.course);
     }
 
     render() {
         return (
             <div>
                 <ul className="list-group list-group-flush">
+                    <div className="newsblock"><h2>Новости</h2></div>
                     <div className="news" >
                         {this.state.new}
                         <div className="block"></div>
@@ -48,4 +49,4 @@ class News_Detail_Component extends Component {
     }
 }
 
-export default News_Detail_Component;
+export default Courses_Detail_Component;
