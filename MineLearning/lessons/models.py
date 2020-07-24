@@ -5,6 +5,7 @@ from courses.models import Course
 from authentication.models import CustomUser
 
 class Lesson(models.Model):
+    slug = models.SlugField(unique=True)
     title = models.CharField(blank=True, max_length=120, null=True)
     preview = models.TextField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)

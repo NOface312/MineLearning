@@ -25,9 +25,9 @@ export async function GetNewList() {
 };
 
 
-export async function ChangeNew({ slug, title, preview, poster, content, creator }) {
+export async function ChangeNew({ slug_old, slug, title, preview, poster, content, creator }) {
     try {
-        const response = await axiosInstance.put('/news/' + slug + '/edit/', {
+        const response = await axiosInstance.put('/news/' + slug_old + '/edit/', {
             slug: slug,
             title: title,
             preview: preview,

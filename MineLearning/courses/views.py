@@ -28,7 +28,8 @@ class Course_API_DETAIL(APIView):
 
 
 class Course_API_LIST(generics.ListAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Course.objects.all()
+    permission_classes = (permissions.AllowAny,)
     serializer_class = CourseSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['=title']

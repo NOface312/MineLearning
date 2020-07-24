@@ -68,6 +68,7 @@ class NewCreateSerializer(serializers.ModelSerializer):
     content = serializers.CharField(allow_blank=False)
     poster = serializers.URLField(
         allow_blank=False, default='')
+    slug = serializers.SlugField(required=True)
 
     class Meta:
         model = New
@@ -123,6 +124,7 @@ class NewUpdateSerializer(serializers.ModelSerializer):
         view_name='user-detail',
         lookup_field='username'
     )
+    slug = serializers.SlugField(required=True)
 
     class Meta:
         model = New
@@ -138,7 +140,7 @@ class NewUpdateSerializer(serializers.ModelSerializer):
             'creator'
         )
         read_only_fields = ('id', 'created_at',
-                            'updated_at', 'creator', 'slug',)
+                            'updated_at', 'creator')
         lookup_field = 'slug'
 
     def update(self, instance, validated_data):

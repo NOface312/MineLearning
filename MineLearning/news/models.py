@@ -22,8 +22,3 @@ class New(models.Model):
 
     def __str__(self):
         return self.slug
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.slug = slugify(self.title)
-        super(New, self).save(*args, **kwargs)

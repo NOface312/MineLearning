@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { DeleteUser } from './../../services/api/user/edit/edit_service';
-import { Logout } from './../../services/api/user/auth/auth_service';
+import { DeleteNew } from '../../services/api/news/news_service';
 
 
-class Delete_User_Modal extends React.Component {
+class Delete_New_Modal extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -28,7 +27,7 @@ class Delete_User_Modal extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        DeleteUser(this.props.data).then(response => {
+        DeleteNew(this.props.data).then(response => {
             console.log('success');
         })
         /*Logout().then(response => {
@@ -44,14 +43,14 @@ class Delete_User_Modal extends React.Component {
         return (
             <>
                 <button type="button" onClick={this.handleShow}>
-                    Удалить аккаунт
+                    Удалить новость
                 </button>
                 <Modal show={this.state.show} onHide={this.handleClose} className="text-dark">
                     <Modal.Header closeButton>
                         <Modal.Title>Изменить документ/запрос</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        Вы уверенны что хотите удалить аккаунт?
+                        Вы уверенны что хотите удалить новость?
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>
@@ -68,4 +67,4 @@ class Delete_User_Modal extends React.Component {
 }
 
 
-export default Delete_User_Modal;
+export default Delete_New_Modal;

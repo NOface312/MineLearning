@@ -4,6 +4,7 @@ from django.utils import timezone
 
 
 class Course(models.Model):
+    slug = models.SlugField(unique=True)
     title = models.CharField(blank=True, max_length=120, null=True)
     preview = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)

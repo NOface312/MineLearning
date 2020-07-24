@@ -67,8 +67,8 @@ class Courses_Api_Example_Component extends Component {
     componentDidMount() {
         this.handleGetCourse();
         this.handleGetCourses();
-        this.handleGetCoursesByOrdering();
-        this.handleGetCoursesBySearch();
+        //this.handleGetCoursesByOrdering();
+        //this.handleGetCoursesBySearch();
     }
 
     render() {

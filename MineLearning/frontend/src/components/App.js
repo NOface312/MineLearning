@@ -21,6 +21,8 @@ import Test_Component from "./test/test_component";
 //News Pages
 //import News_Api_Example_Component from "./news/news_api_example";
 import News_Create_Component from './news/api_components/news_create';
+import News_Detail_Component from './news/api_components/news_detail';
+import News_Edit_Component from './news/api_components/news_edit';
 
 //Stude Pages
 import Lessons_Api_Example_Component from "./study/lessons_api_example";
@@ -47,10 +49,13 @@ class App extends Component {
                                 <Access_Token_Route exact path={"/account/edit/data/"} component={Edit_Profile_Component} />
 
                                 <Admin_Route exact path={"/news/create/"} component={News_Create_Component} />
+                                <Admin_Route exact path={"/news/edit/:new"} component={News_Edit_Component} />
+                                <Route path="/news/:new" component={ News_Detail_Component } />
 
                                 <Access_Token_Route exact path={"/test/lesson/"} component={Lessons_Api_Example_Component} />
                                 <Access_Token_Route exact path={"/test/course/"} component={Courses_Api_Example_Component} />
                                 <Access_Token_Route exact path={"/test/basic/"} component={Test_Component} />
+                                
 
                                 <Route exact path={"/login/"} component={ Login_Component } />
                                 <Route exact path={"/signup/"} component={ Signup_Component } />

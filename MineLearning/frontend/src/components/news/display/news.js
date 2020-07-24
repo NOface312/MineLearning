@@ -9,10 +9,10 @@ class News_Component extends Component {
         this.state = {
             news: null,
         };
-        this.handleRenderPosts = this.handleRenderPosts.bind(this);
+        this.handleRenderNewsBlock = this.handleRenderNewsBlock.bind(this);
     }
 
-    handleRenderPosts() {
+    handleRenderNewsBlock() {
         GetNewList().then(response => {
             this.setState({
                 news: response.data.map((post, i) => (
@@ -31,7 +31,7 @@ class News_Component extends Component {
     }
 
     componentDidMount() {
-        this.handleRenderPosts();
+        this.handleRenderNewsBlock();
     }
 
       render() {
