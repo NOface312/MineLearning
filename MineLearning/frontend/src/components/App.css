@@ -3,6 +3,9 @@
 }
 
 body {
-    overflow-x: hidden;
-    background-color: #FFF;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /*overflow-x: hidden;*/
+    background-image: url("/static/frontend/back/background.png");
     }

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import "./not_found.css"
 
 class NotFound extends React.Component {
     render() {
         return (
             <>
-            <h1>404 NOT FOUND</h1>
+            <img src="/static/frontend/back/notfound.png" className="nfimg" />
             </>
         );
     }

@@ -18,11 +18,16 @@ from .serializers import (
     CourseDetailSerializer
 )
 
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import status, filters, generics
 
 class CourseListAPIView(generics.ListAPIView):
     queryset = Course.objects.all()
     serializer_class = CourseListSerializer
     permission_classes = [AllowAny]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['title']
+    ordering_fields = '__all__'
 
 
 class CourseCreateAPIView(generics.CreateAPIView):

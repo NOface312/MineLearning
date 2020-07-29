@@ -13,9 +13,9 @@ export async function GetNewDetail(slug) {
 };
 
 
-export async function GetNewList() {
+export async function GetNewList(arg = '') {
     try {
-        const response = await axiosInstance.get('/news/', {
+        const response = await axiosInstance.get('/news/?ordering=-created_at', {
             "refresh_token": localStorage.getItem("refresh_token")
         });
         return response;

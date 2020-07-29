@@ -1,36 +1,47 @@
-.header-body{
-width: 100%;
-height: 100px;
-left: 0px;
-top: 0px;
+@import "https://fonts.googleapis.com/css?family=Pridi";
 
-background: #260B5D;
+.header-body{
+    height: 120px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    
+    background: #F4EBDB;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
 }
 
 .header-cabinetbuttons{
     position: absolute;
-width: 127px;
-height: 100px;
-left: 1301px;
-top: 100px;
-
-background-color: brown;
+width: 118px;
+left: 95%;
+top: 130px;
+height: 80px;
+background: #F4EBDB;
+box-shadow: 10px 20px 20px rgba(0, 0, 0, 0.6);
 z-index: 1;
+border-radius: 10px 10px 10px 10px;
+opacity: 0;
+transition: ease .3s;
 }
 
-.header-main{
-    position: absolute;
-    width: 108px;
-    height: 100px;
-    left: 445px;
-    top: 0px;
+
+.header-logo{
+    position: relative;
+    left: 5px;
+    top: 22px;
+}
+
+.header-login{
+    margin-top: 8%;
+    position: relative;
+    width: 50%;
+    margin-left: 25%;
     border:none;
-    background: #260B5D;
-    font-family: PT Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 22px;
-line-height: 20px;
+    border-radius: 8px;
+    background: #F4EBDB;
+    font-family: Pridi;
+    font-style: normal;
+    font-weight: normal;
 
 /* or 91% */
 
@@ -38,27 +49,25 @@ align-items: center;
 text-align: center;
 letter-spacing: -0.41px;
 transition: all 0.3s ease;
-color: #FFFFFF;
+color: #2C4A52;
 }
 
-.header-main:hover{
-    background: #FFFFFF;
-    color: #260B5D;
+.header-login:hover{
+    color: #F4EBDB;
+    background: #2C4A52;
 }
 
-.header-control{
-    position: absolute;
-    width: 124px;
-    height: 100px;
-    left: 553px;
-    top: 0px;
+.header-signup{
+    border-radius: 8px;
+    margin-top: 5%;
+    position: relative;
+    width: 90%;
+    margin-left: 5%;
     border:none;
-    background: #260B5D;
-    font-family: PT Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 22px;
-line-height: 20px;
+    background: #F4EBDB;
+    font-family: Pridi;
+    font-style: normal;
+    font-weight: normal;
 
 /* or 91% */
 
@@ -66,111 +75,25 @@ align-items: center;
 text-align: center;
 letter-spacing: -0.41px;
 transition: all 0.3s ease;
-color: #FFFFFF;
+color: #2C4A52;
 }
 
-.header-control:hover{
-    background: #FFFFFF;
-    color: #260B5D;
+.header-signup:hover{
+    color: #F4EBDB;
+    background: #2C4A52;
 }
 
-.header-pricelist{
-    position: absolute;
-width: 138px;
-height: 100px;
-left: 677px;
-top: 0px;
-border:none;
-background: #260B5D;
-font-family: PT Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 22px;
-line-height: 20px;
-
-/* or 91% */
-
-align-items: center;
-text-align: center;
-letter-spacing: -0.41px;
-transition: all 0.3s ease;
-color: #FFFFFF;
-}
-
-.header-pricelist:hover{
-    background: #FFFFFF;
-    color: #260B5D;
-}
-
-.header-personal{
-    position: absolute;
-    width: 128px;
-    height: 100px;
-    left: 815px;
-    top: 0px;
-    border:none;
-    background: #260B5D;
-    font-family: PT Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 22px;
-line-height: 20px;
-
-/* or 91% */
-
-align-items: center;
-text-align: center;
-letter-spacing: -0.41px;
-transition: all 0.3s ease;
-color: #FFFFFF;
-}
-
-.header-personal:hover{
-    background: #FFFFFF;
-    color: #260B5D;
-}
-
-.header-settings{
-    position: absolute;
-width: 134px;
-height: 100px;
-left: 943px;
-top: 0px;
-border:none;
-background: #260B5D;
-font-family: PT Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 22px;
-line-height: 20px;
-
-/* or 91% */
-
-align-items: center;
-text-align: center;
-letter-spacing: -0.41px;
-transition: all 0.3s ease;
-color: #FFFFFF;
-}
-
-.header-settings:hover{
-    background: #FFFFFF;
-    color: #260B5D;
-}
-
-.header-payments{
+.header-about{
     position: absolute;
     width: 116px;
-    height: 100px;
-    left: 1077px;
+    height: 120px;
+    left: 68.5%;
     top: 0px;
     border:none;
-    background: #260B5D;
-    font-family: PT Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 22px;
-line-height: 20px;
+    background: #F4EBDB;
+    font-family: Pridi;
+    font-style: normal;
+    font-weight: normal;
 
 /* or 91% */
 
@@ -178,27 +101,26 @@ align-items: center;
 text-align: center;
 letter-spacing: -0.41px;
 transition: all 0.3s ease;
-color: #FFFFFF;
+color: #2C4A52;
 }
 
-.header-payments:hover{
-    background: #FFFFFF;
-    color: #260B5D;
+.header-about:hover{
+    color: #F4EBDB;
+    background: #2C4A52;
 }
 
-.header-reviews{
+.header-school{
     position: absolute;
     width: 108px;
-    height: 100px;
-    left: 1193px;
+    height: 120px;
+    left: 76%;
     top: 0px;
     border:none;
-    background: #260B5D;
-    font-family: PT Sans;
+    background: #F4EBDB;
+    font-family: Pridi;
 font-style: normal;
 font-weight: normal;
-font-size: 22px;
-line-height: 20px;
+letter-spacing: 0.025em;
 
 /* or 91% */
 
@@ -206,37 +128,121 @@ align-items: center;
 text-align: center;
 letter-spacing: -0.41px;
 transition: all 0.3s ease;
-color: #FFFFFF;
+color: #2C4A52;
 }
 
-.header-reviews:hover{
-    background: #FFFFFF;
-    color: #260B5D;
+.header-school:hover{
+    color: #F4EBDB;
+    background: #2C4A52;
 }
 
-.header-clients{
+.header-cabinet{
     position: absolute;
     width: 118px;
-    height: 100px;
-    left: 1301px;
+    height: 120px;
+    left: 90%;
     top: 0px;
     border:none;
-    background: #260B5D;
-    font-family: PT Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 22px;
-line-height: 20px;
+    background: #F4EBDB;
+    font-family: Pridi;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: 0.025em;
 
 /* or 91% */
 align-items: center;
 text-align: center;
 letter-spacing: -0.41px;
 transition: all 0.3s ease;
-color: #FFFFFF;
+color: #2C4A52;
 }
 
-.header-clients:hover{
-    background: #FFFFFF;
-    color: #260B5D;
+.header-cabinet:hover{
+    color: #F4EBDB;
+    background: #2C4A52;
 }
+
+.header-forum{
+    position: absolute;
+    width: 118px;
+    height: 120px;
+    left: 82.5%;
+    top: 0px;
+    border:none;
+    background: #F4EBDB;
+    font-family: Pridi;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: 0.025em;
+
+/* or 91% */
+align-items: center;
+text-align: center;
+letter-spacing: -0.41px;
+transition: all 0.3s ease;
+color: #2C4A52;
+}
+
+.header-forum:hover{
+    color: #F4EBDB;
+    background: #2C4A52;    
+}
+  
+.list-body {
+    position: absolute;
+    top: 130px;
+    left: 86%;
+    z-index: 1;
+    box-sizing: border-box;
+    width: 200px;
+    padding: 0 20px;
+    overflow: hidden;
+    background-color: #F4EBDB;
+    border-radius: 5px;
+  }
+  
+.list {
+    padding: 0;
+    list-style-type: none;
+  }
+  
+.list-item {
+    padding: 5px 0;
+  }
+  
+  /* This fires as soon as the element enters the dorm */
+.list-transition-enter,
+.list-transition-appear {
+    /*We give the list the initial dimension of the list button*/
+    top: 120px;
+    width: -120px;
+    max-height: 40px;
+    color: transparent;
+    background-color: #F4EBDB;
+  }
+  /* This is where we can add the transition*/
+.list-transition-enter-active,
+.list-transition-appear-active {
+    top: 135px;
+    width: -200px;
+    max-height: 200px;
+    background-color: #F4EBDB;
+    transition: all 400ms;
+  }
+  
+  /* This fires as soon as the this.state.showList is false */
+.list-transition-exit {
+    top: 135px;
+    width: -200px;
+    max-height: 200px;
+    background-color: #F4EBDB;
+  }
+  /* fires as element leaves the DOM*/
+.list-transition-exit-active {
+    top: 120px;
+    width: -120px;
+    max-height: 40px;
+    color: transparent;
+    background-color: #F4EBDB;
+    transition: all 400ms;
+  }

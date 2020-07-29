@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { Redirect, Route, Link } from "react-router-dom";
 import "./../css/login.css";
+import {
+    Container, Col, Form,
+    FormGroup, Label, Input,
+    Button,
+} from 'reactstrap';
 import { Login } from './../../../services/api/user/auth/auth_service'
 
 class Login_Component extends Component {
@@ -11,10 +16,10 @@ class Login_Component extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
+ 
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
-    }
+    } 
 
     handleSubmit(event) {
         event.preventDefault();
@@ -28,32 +33,43 @@ class Login_Component extends Component {
     }
 
     render() {
+        const { username, password } = this.state;
         return (
-            <div className="simple-login-container">
-                <form className="form" onSubmit={this.handleSubmit}>
-                    <h2>Войти</h2>
-                    <div className="row">
-                        <div className="col-md-12 form-group">
-                            <input name="username" type="text" className="form-control" placeholder="Логин" value={this.state.username} onChange={this.handleChange}/>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-12 form-group">
-                            <input name="password" type="password" placeholder="Пароль" className="form-control" value={this.state.password} onChange={this.handleChange}/>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-12 form-group">
-                            <input type="submit" className="btn btn-block btn-login"/>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <label>Нет учётной записи?</label>
-                        <div className="col-md-12">
-                            <Link to="/signup/">Регистрация</Link>
-                        </div>
-                    </div>
-                </form>
+            <div className="cont">
+                <Container className="login">
+                    <div className="name"><h2>Авторизация</h2></div>
+                    <Form className="form" onSubmit={(e) => this.handleSubmit(e)}>
+                        <Col>
+                            <FormGroup>
+                                <Label>Username</Label>
+                                <Input
+                                    type="text"
+                                    name="username"
+                                    id="username"
+                                    placeholder="username"
+                                    value={username}
+                                    onChange={(e) => {
+                                        this.handleChange(e)
+                                    }}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col>
+                            <FormGroup>
+                                <Label for="examplePassword">Password</Label>
+                                <Input
+                                    type="password"
+                                    name="password"
+                                    id="examplePassword"
+                                    placeholder="********"
+                                    value={password}
+                                    onChange={(e) => this.handleChange(e)}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Button>Войти</Button>
+                    </Form>
+                </Container>
             </div>
         )
     }

@@ -17,12 +17,17 @@ from .serializers import (
     NewUpdateSerializer,
     NewDetailSerializer
 )
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import status, filters, generics
 
 
 class NewListAPIView(generics.ListAPIView):
     queryset = New.objects.all()
     serializer_class = NewListSerializer
     permission_classes = [AllowAny]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['slug']
+    ordering_fields = '__all__'
 
 
 class NewCreateAPIView(generics.CreateAPIView):

@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { SingUp } from './../../../services/api/user/auth/auth_service';
+import {
+    Container, Col, Form,
+    FormGroup, Label, Input,
+    Button, FormFeedback,
+} from 'reactstrap';
+import "./../css/signup.css"
 
 class Signup_Component extends Component {
     constructor(props) {
@@ -12,7 +18,10 @@ class Signup_Component extends Component {
             name: "",
             surname: "",
             second_name: "",
-            errors: {}
+            errors: {},
+            validate: {
+                emailState: '',
+            },
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -36,62 +45,136 @@ class Signup_Component extends Component {
         SingUp(options).then(response => {
             this.props.history.push("/login/");
         })
+    } 
+    validateEmail(e) {
+        const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const { validate } = this.state
+        if (emailRex.test(e.target.value)) {
+            validate.emailState = 'has-success'
+        } else {
+            validate.emailState = 'has-danger'
+        }
+        this.setState({ validate })
     }
 
     render() {
+        const { username, password, email, name, surname, second_name } = this.state;
         return (
-            <div className="simple-login-container">
-                <form className="form" onSubmit={this.handleSubmit}>
-                    <h2>Регистрация</h2>
-                    <div className="row">
-                        <div className="col-md-12 form-group">
-                            <input name="name" type="text" placeholder="Имя" className="form-control" value={this.state.name} onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-12 form-group">
-                            <input name="surname" type="text" placeholder="Фамилия" className="form-control" value={this.state.surname} onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-12 form-group">
-                            <input name="second_name" type="text" placeholder="Отчество" className="form-control" value={this.state.second_name} onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-12 form-group">
-                            <input name="username" type="text" className="form-control" placeholder="Логин" value={this.state.username} onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-12 form-group">
-                            <input name="email" type="text" className="form-control" placeholder="Почта" value={this.state.email} onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-12 form-group">
-                            <input name="password" type="password" placeholder="Пароль" className="form-control" value={this.state.password} onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-12 form-group">
-                            <input name="password2" type="password" placeholder="Повторите пароль" className="form-control"/>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-12 form-group">
-                            <input type="submit" className="btn btn-block btn-login" />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <label>Есть учётная запись?</label>
-                        <div className="col-md-12">
-                            <Link to="/login/">Войти</Link>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        )
+            <>
+                <Container className="login">
+                    <div className="name"><h2>Sign In</h2></div>
+                    <Form className="form" onSubmit={(e) => this.handleSubmit(e)}>
+                        <Col>
+                            <FormGroup>
+                                <Label>Имя</Label>
+                                <Input
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    placeholder="Имя"
+                                    value={name}
+                                    onChange={(e) => {
+                                        this.handleChange(e)
+                                    }}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col>
+                            <FormGroup>
+                                <Label>Фамилия</Label>
+                                <Input
+                                    type="text"
+                                    name="surname"
+                                    id="surname"
+                                    placeholder="Фамилия"
+                                    value={surname}
+                                    onChange={(e) => {
+                                        this.handleChange(e)
+                                    }}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col>
+                            <FormGroup>
+                                <Label>Отчество</Label>
+                                <Input
+                                    type="text"
+                                    name="second_name"
+                                    id="second_name"
+                                    placeholder="Отчество"
+                                    value={second_name}
+                                    onChange={(e) => {
+                                        this.handleChange(e)
+                                    }}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col>
+                            <FormGroup>
+                                <Label>Имя пользователя</Label>
+                                <Input
+                                    type="text"
+                                    name="username"
+                                    id="username"
+                                    placeholder="username"
+                                    value={username}
+                                    onChange={(e) => {
+                                        this.handleChange(e)
+                                    }}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col>
+                            <FormGroup>
+                                <Label>Почта</Label>
+                                <Input
+                                    type="text"
+                                    name="email"
+                                    id="email"
+                                    placeholder="username"
+                                    value={email}
+                                    valid={this.state.validate.emailState === 'has-success'}
+                                    invalid={this.state.validate.emailState === 'has-danger'}
+                                    onChange={(e) => {
+                                        this.validateEmail(e)
+                                        this.handleChange(e)
+                                    }}
+                                />
+                            </FormGroup>
+                            <FormFeedback>
+                                Введите действующий почтовый ящик.
+              </FormFeedback>
+                        </Col>
+                        <Col>
+                            <FormGroup>
+                                <Label for="examplePassword">Пароль</Label>
+                                <Input
+                                    type="password"
+                                    name="password"
+                                    id="examplePassword"
+                                    placeholder="********"
+                                    value={password}
+                                    onChange={(e) => this.handleChange(e)}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col>
+                            <FormGroup>
+                                <Label for="examplePassword">Повторите пароль</Label>
+                                <Input
+                                    type="password"
+                                    name="password"
+                                    id="examplePassword"
+                                    placeholder="********"
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Button>Зарегистрироваться</Button>
+                    </Form>
+                </Container>
+                <div className="ccc" />
+            </>
+        );
     }
 }
 

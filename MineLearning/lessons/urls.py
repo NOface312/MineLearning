@@ -1,9 +1,18 @@
 from django.urls import path
 from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import Lesson_API_DETAIL, Lesson_API_LIST
+from .views import (
+    LessonCreateAPIView,
+    LessonDetailAPIView,
+    LessonListAPIView,
+    LessonDeleteAPIView,
+    LessonUpdateAPIView
+)
 
 urlpatterns = [
-    path('<int:pk>/', Lesson_API_DETAIL.as_view(), name='get_lesson_detail'),
-    path('', Lesson_API_LIST.as_view(), name='get_lessons_list'),
+    path('', LessonListAPIView.as_view(), name='lesson-list'),
+    path('create/', LessonCreateAPIView.as_view(), name='lesson-create'),
+    path('<slug:slug>/', LessonDetailAPIView.as_view(), name='lesson-detail'),
+    path('<slug:slug>/edit/', LessonUpdateAPIView.as_view(), name='lesson-update'),
+    path('<slug:slug>/delete/', LessonDeleteAPIView.as_view(), name='lesson-delete'),
 ]

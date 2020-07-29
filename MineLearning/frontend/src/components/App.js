@@ -30,13 +30,17 @@ import Courses_Detail_Component from './study/course/courses_detail';
 import Courses_Edit_Component from './study/course/courses_edit';
 import Courses_List_Component from './study/course/courses_list';
 
+//Lessons Pages
+import Lessons_Create_Component from './study/lesson/lessons_create';
+import Lessons_Edit_Component from './study/lesson/lessons_edit';
+import Lessons_Detail_Component from './study/lesson/lessons_detail';
+import Lessons_List_Component from './study/lesson/lessons_list';
 
-//Stude Pages
-import Lessons_Api_Example_Component from "./study/lessons_api_example";
-import Courses_Api_Example_Component from "./study/courses_api_example";
 
 //404
 import NotFound from "./notfound/NotFound"
+
+import Cabinet_Component from "./cabinet/cabinet"
 
 import "./App.css"
 
@@ -62,18 +66,20 @@ class App extends Component {
 
                                 <Admin_Route exact path={"/courses/create/"} component={Courses_Create_Component} />
                                 <Admin_Route exact path={"/courses/edit/:course"} component={Courses_Edit_Component} />
-                                <Route path="/courses/:course" component={Courses_Detail_Component} />
-                                <Route path="/courses/" component={Courses_List_Component} />
+                                <Access_Token_Route exact path={"/courses/detail/:course"} component={Courses_Detail_Component} />
+                                <Access_Token_Route exact path="/courses/list/" component={Courses_List_Component} />
 
-                                <Access_Token_Route exact path={"/test/lesson/"} component={Lessons_Api_Example_Component} />
-                                <Access_Token_Route exact path={"/test/course/"} component={Courses_Api_Example_Component} />
-                                <Access_Token_Route exact path={"/test/basic/"} component={Test_Component} />
+                                <Admin_Route exact path={"/lessons/create/"} component={Lessons_Create_Component} />
+                                <Admin_Route exact path={"/lessons/edit/:lesson"} component={Lessons_Edit_Component} />
+                                <Access_Token_Route path={"/lessons/detail/:lesson"} component={Lessons_Detail_Component} />
+                                <Access_Token_Route path={"/lessons/list/:course"} component={Lessons_List_Component} />
                                 
+                                <Access_Token_Route exact path={"/cabinet"} component={Cabinet_Component} />
 
                                 <Route exact path={"/login/"} component={ Login_Component } />
                                 <Route exact path={"/signup/"} component={ Signup_Component } />
 
-                                <Route component={NotFound} />
+                                <Route component={NotFound} /> 
                             </Switch>
                         </BrowserRouter>
                     </main>

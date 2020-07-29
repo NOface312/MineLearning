@@ -15,7 +15,7 @@ export async function GetCourseDetail(slug) {
 
 export async function GetCourseList() {
     try {
-        const response = await axiosInstance.get('/courses/', {
+        const response = await axiosInstance.get('/courses/?ordering=-id', {
             "refresh_token": localStorage.getItem("refresh_token")
         });
         return response;

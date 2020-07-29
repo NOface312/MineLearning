@@ -11,19 +11,22 @@ class News_Component extends Component {
         };
         this.handleRenderNewsBlock = this.handleRenderNewsBlock.bind(this);
     }
-
     handleRenderNewsBlock() {
         GetNewList().then(response => {
             this.setState({
                 news: response.data.map((post, i) => (
                     <>
-                    <div className="block">
-                      <div className="title"><h4>{post.title}</h4></div>
-                      <div className="text"><h5>{post.preview}</h5></div>
-                      <div className="line"></div>
-                      <div className="picdiv"><img className="pic" src={post.poster} /></div>
-                  </div>
-
+                        <table className="block">
+                            <tr>
+                                <td>
+                                    <div className="picdiv"><img className="pic" src={post.poster} /></div>
+                                </td>
+                                <td>
+                                    <div className="title">{post.title}</div>
+                                    <div className="text" dangerouslySetInnerHTML={{__html: post.preview}}/>
+                                </td>
+                            </tr>
+                        </table>
                     </>
                 ))
             })
@@ -36,15 +39,12 @@ class News_Component extends Component {
 
       render() {
         return (
-        <div>
-            <ul className="list-group list-group-flush">
-            <div className="newsblock"><h2>Новости</h2></div>
-            <div className="news" >
-                {this.state.news}
-                <div className="block"></div>
+            <div>
+                <ul className="list-group list-group-flush">
+                    <div className="newsblock"><h2>Новости</h2></div>
+                    {this.state.news}
+                </ul>
             </div>
-            </ul>
-          </div>
         );
       }
 }

@@ -1,37 +1,57 @@
-from django.shortcuts import render
-from rest_framework.views import APIView
-from rest_framework import status, permissions
-from rest_framework.decorators import api_view
+from lessons.models import Lesson
+from rest_framework import generics, views
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticated,
+    IsAdminUser,
+    IsAuthenticatedOrReadOnly,
+)
+
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.response import Response
-from .models import *
-from .serializers import *
-from random import randint
-import time
-from django.http import Http404
-import jwt
+
+from .serializers import (
+    LessonListSerializer,
+    LessonDeleteSerializer,
+    LessonCreateSerializer,
+    LessonUpdateSerializer,
+    LessonDetailSerializer
+)
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, generics
 
 
-class Lesson_API_DETAIL(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
-
-    def get_object(self, pk):
-        try:
-            return Lesson.objects.get(pk=pk)
-        except Lesson.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk, format='json'):
-        lesson = self.get_object(pk)
-        serializer = LessonSerializer(lesson)
-        return Response(serializer.data)
-
-
-class Lesson_API_LIST(generics.ListAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
+class LessonListAPIView(generics.ListAPIView):
     queryset = Lesson.objects.all()
-    serializer_class = LessonSerializer
+    serializer_class = LessonListSerializer
+    permission_classes = [AllowAny]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['=title', '=course__title']
+    search_fields = ['course__slug']
     ordering_fields = '__all__'
+
+
+class LessonCreateAPIView(generics.CreateAPIView):
+    serializer_class = LessonCreateSerializer
+    queryset = Lesson.objects.all()
+    permission_classes = [IsAdminUser]
+
+
+class LessonDetailAPIView(generics.RetrieveAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonDetailSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'slug'
+
+
+class LessonDeleteAPIView(generics.DestroyAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonDeleteSerializer
+    permission_classes = [IsAdminUser]
+    lookup_field = 'slug'
+
+
+class LessonUpdateAPIView(generics.UpdateAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonUpdateSerializer
+    permission_classes = [IsAdminUser]
+    lookup_field = 'slug'

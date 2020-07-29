@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
-import News_Component from "./../news/display/news"
+import News_Component from "../news/display/news"
 import PanelPage from "./panels/panels"
 
 class Landing_Component extends Component {
