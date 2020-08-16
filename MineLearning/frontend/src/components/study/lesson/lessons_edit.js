@@ -75,7 +75,6 @@ class Lessons_Edit_Component extends Component {
                 course: this.state.course,
                 course_old: this.state.course_old
             };
-            console.log(options);
             ChangeLesson(options).then(response => {
                 alert("Готово!");
             })
@@ -96,7 +95,6 @@ class Lessons_Edit_Component extends Component {
                         content: this.state.content,
                         creator: this.state.creator,
                     };
-                    console.log(options);
                     ChangeLesson(options).then(response => {
                         alert("Готово!");
                     })

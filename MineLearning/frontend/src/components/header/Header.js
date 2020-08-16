@@ -38,7 +38,6 @@ class Header extends React.Component {
 
     render() {
         let loggedIn=localStorage.getItem("access_token")
-        console.log(loggedIn);
         return (
             <>
             <div className="header-body">

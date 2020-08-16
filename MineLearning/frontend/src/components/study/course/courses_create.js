@@ -70,7 +70,6 @@ class Courses_Create_Component extends Component {
                     content: this.state.content,
                     creator: this.state.creator,
                 };
-                console.log(options);
                 CreateCourse(options).then(response => {
                     alert("Готово!");
                 })

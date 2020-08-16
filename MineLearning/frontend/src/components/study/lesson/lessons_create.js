@@ -33,7 +33,6 @@ class Lessons_Create_Component extends Component {
     }
 
     handleChange(event) {
-        console.log(this.state.course);
         this.setState({ [event.target.name]: event.target.value });
     }
 
@@ -75,7 +74,6 @@ class Lessons_Create_Component extends Component {
                     creator: this.state.creator,
                     course: this.state.course
                 };
-                console.log(options);
                 CreateLesson(options).then(response => {
                     alert("Готово!");
                 })

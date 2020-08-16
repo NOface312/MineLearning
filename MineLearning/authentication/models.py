@@ -28,8 +28,6 @@ class CustomUser(AbstractUser):
 @receiver(post_save, sender=CustomUser)
 def create_superuser_profile(sender, instance, created, **kwargs):
     if created and instance.is_superuser:
-        print(created)
-        print(instance)
         user = CustomUser.objects.get(username=str(instance))
         user.bio='I am the admin and I manage this website'
         user.avatar='http://res.cloudinary.com/rengorum/image/upload/v1525768360/admin.png'

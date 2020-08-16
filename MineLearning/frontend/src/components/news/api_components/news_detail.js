@@ -27,7 +27,6 @@ class News_Detail_Component extends Component {
                     </>
             })
         })
-        console.log(this.state.new);
     }
 
     componentDidMount() {

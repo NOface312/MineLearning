@@ -40,7 +40,6 @@ class Lesson_Component extends Component {
                     </>
                 ))
             })
-            console.log(response.data)
         })
     };
 

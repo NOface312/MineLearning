@@ -44,7 +44,6 @@ axiosInstance.interceptors.response.use(
             axiosInstance.defaults.headers['Authorization'] = null;
             window.location.reload();
         }
-        console.log(error.response.data);
         if (error.response.data.code === "token_not_valid" &&
             error.response.status === 401 &&
             error.response.statusText === "Unauthorized") {

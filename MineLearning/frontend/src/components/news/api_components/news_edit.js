@@ -70,7 +70,6 @@ class News_Edit_Component extends Component {
                 content: this.state.content,
                 creator: this.state.creator,
             };
-            console.log(options);
             ChangeNew(options).then(response => {
                 alert("Готово!");
             })
@@ -91,7 +90,6 @@ class News_Edit_Component extends Component {
                         content: this.state.content,
                         creator: this.state.creator,
                     };
-                    console.log(options);
                     ChangeNew(options).then(response => {
                         alert("Готово!");
                     })

@@ -18,7 +18,6 @@ import Edit_Profile_Component from "./auth/account_settings/edit_profile";
 import Test_Component from "./test/test_component";
 
 //News Pages
-//import News_Api_Example_Component from "./news/news_api_example";
 import News_Create_Component from './news/api_components/news_create';
 import News_Detail_Component from './news/api_components/news_detail';
 import News_Edit_Component from './news/api_components/news_edit';

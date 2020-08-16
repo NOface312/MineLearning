@@ -70,7 +70,6 @@ class News_Create_Component extends Component {
                     content: this.state.content,
                     creator: this.state.creator,
                 };
-                console.log(options);
                 CreateNew(options).then(response => {
                     alert("Готово!");
                 })
@@ -123,7 +122,6 @@ class News_Create_Component extends Component {
                         editor={ClassicEditor}
                         data="<p>Hello from CKEditor 5!</p>"
                         onInit={editor => {
-                            // You can store the "editor" and use when it is needed.
                             console.log('Editor is ready to use!', editor);
                         }}
                         onChange={this.handlePreviewCkeditorState}
@@ -133,7 +131,6 @@ class News_Create_Component extends Component {
                         editor={ClassicEditor}
                         data="<p>Hello from CKEditor 5!</p>"
                         onInit={editor => {
-                            // You can store the "editor" and use when it is needed.
                             console.log('Editor is ready to use!', editor);
                         }}
                         onChange={this.handleContentCkeditorState}

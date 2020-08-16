@@ -27,7 +27,6 @@ class Lessons_Detail_Component extends Component {
                     </>
             })
         })
-        console.log(this.state.lesson);
     } 
 
     componentDidMount() {

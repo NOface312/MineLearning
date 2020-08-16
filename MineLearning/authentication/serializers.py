@@ -184,7 +184,6 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         surname = validated_data['surname']
         bio = validated_data['bio']
         email = validated_data['email']
-        print(name)
         instance.name = name
         instance.second_name = second_name 
         instance.surname = surname 
