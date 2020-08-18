@@ -11,7 +11,7 @@ import { Login } from './../../../services/api/user/auth/auth_service'
 class Login_Component extends Component {
     constructor(props) {
         super(props);
-        this.state = { username: "", password: ""};
+        this.state = { username: "", password: "", error_status: ""};
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,7 +29,12 @@ class Login_Component extends Component {
         };
         Login(options).then(response => {
             this.props.history.push("/");
-        })
+        }).catch(error => {
+            console.log(error);
+            this.setState({
+                error_status: error.response.data.title,
+            });
+        });
     }
 
     render() {
@@ -38,6 +43,7 @@ class Login_Component extends Component {
             <div className="cont">
                 <Container className="login">
                     <div className="name"><h2>Авторизация</h2></div>
+                    {this.state.error_status}
                     <Form className="form" onSubmit={(e) => this.handleSubmit(e)}>
                         <Col>
                             <FormGroup>

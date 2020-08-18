@@ -23,7 +23,8 @@ class News_Edit_Component extends Component {
             posterFile: null,
             posterError: null,
             posterUploading: false,
-            errors: {}
+            errors: {},
+            error_status: "",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -58,6 +59,7 @@ class News_Edit_Component extends Component {
     };
 
     handleSubmit(event) {
+        console.log(this.state.error_status);
         event.preventDefault();
         let file = this.state.posterFile;
         if (this.state.poster_old == this.state.poster) {
@@ -73,35 +75,55 @@ class News_Edit_Component extends Component {
             ChangeNew(options).then(response => {
                 alert("Готово!");
             })
+            .catch(error => {
+                console.log(error);
+                this.setState({
+                    error_status: error.response.data.title,
+                });
+            });
         }
         else {
-            imageUploadApi(file)
-                .then(response => {
-                    this.setState({
-                        poster: response.data.secure_url,
-                        posterUploading: false,
-                    });
-                    let options = {
-                        slug: this.state.slug,
-                        slug_old: this.state.slug_old,
-                        title: this.state.title,
-                        preview: this.state.preview,
-                        poster: this.state.poster,
-                        content: this.state.content,
-                        creator: this.state.creator,
-                    };
-                    ChangeNew(options).then(response => {
-                        alert("Готово!");
-                    })
+            if (this.state.posterUploading) {
+                ChangeNew(options).then(response => {
+                    alert("Готово!");
                 })
                 .catch(error => {
                     console.log(error);
                     this.setState({
-                        posterError: 'Image Upload Error',
-                        posterFile: null,
-                        posterUploading: false,
+                        error_status: error.response.data.title,
                     });
                 });
+            }
+            else {
+                imageUploadApi(file)
+                    .then(response => {
+                        this.setState({
+                            poster: response.data.secure_url,
+                            posterUploading: true,
+                        });
+                        let options = {
+                            slug: this.state.slug,
+                            slug_old: this.state.slug_old,
+                            title: this.state.title,
+                            preview: this.state.preview,
+                            poster: this.state.poster,
+                            content: this.state.content,
+                            creator: this.state.creator,
+                        };
+                        ChangeNew(options).then(response => {
+                            alert("Готово!");
+                        })
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        this.setState({
+                            posterError: 'Image Upload Error',
+                            error_status: 'Image Upload Error',
+                            posterFile: null,
+                            posterUploading: false,
+                        });
+                    });
+            }
         }
     }
 
@@ -130,6 +152,7 @@ class News_Edit_Component extends Component {
             <div className="simple-login-container">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <h2>Редактирование новости</h2>
+                    {this.state.error_status}
                     <div className="row">
                         <div className="col-md-12 form-group">
                             <input name="slug" type="text" placeholder="Метка(для поиска в бд)" className="form-control" value={this.state.slug} onChange={this.handleChange} />

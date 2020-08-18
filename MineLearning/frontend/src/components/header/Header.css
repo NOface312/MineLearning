@@ -246,3 +246,90 @@ color: #2C4A52;
     background-color: #F4EBDB;
     transition: all 400ms;
   }
+
+
+  .list-body-admin {
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    z-index: 1;
+    box-sizing: border-box;
+    width: 200px;
+    padding: 0 20px;
+    overflow: hidden;
+    background-color: #F4EBDB;
+    border-radius: 5px;
+  }
+  
+.list-admin {
+    padding: 0;
+    list-style-type: none;
+  }
+  
+.list-item-admin {
+    padding: 5px 0;
+  }
+  
+  /* This fires as soon as the element enters the dorm */
+.list-transition-admin-enter,
+.list-transition-admin-appear {
+    /*We give the list the initial dimension of the list button*/
+    top: 120px;
+    width: -120px;
+    max-height: 60px;
+    color: transparent;
+    background-color: #F4EBDB;
+  }
+  /* This is where we can add the transition*/
+.list-transition-admin-enter-active,
+.list-transition-admin-appear-active {
+    top: 135px;
+    width: -200px;
+    max-height: 400px;
+    background-color: #F4EBDB;
+    transition: all 400ms;
+  }
+  
+  /* This fires as soon as the this.state.showList is false */
+.list-transition-admin-exit {
+    top: 135px;
+    width: -200px;
+    max-height: 400px;
+    background-color: #F4EBDB;
+  }
+  /* fires as element leaves the DOM*/
+.list-transition-admin-exit-active {
+    top: 120px;
+    width: -120px;
+    max-height: 60px;
+    color: transparent;
+    background-color: #F4EBDB;
+    transition: all 400ms;
+  }
+
+  .header-adminpanel{
+    position: absolute;
+    width: 108px;
+    height: 120px;
+    left: 50%;
+    top: 0px;
+    border:none;
+    background: #F4EBDB;
+    font-family: Pridi;
+font-style: normal;
+font-weight: normal;
+letter-spacing: 0.025em;
+
+/* or 91% */
+
+align-items: center;
+text-align: center;
+letter-spacing: -0.41px;
+transition: all 0.3s ease;
+color: #2C4A52;
+}
+
+.header-adminpanel:hover{
+    color: #F4EBDB;
+    background: #2C4A52;
+}

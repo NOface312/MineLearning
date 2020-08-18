@@ -19,6 +19,7 @@ class Signup_Component extends Component {
             surname: "",
             second_name: "",
             errors: {},
+            error_status: "",
             validate: {
                 emailState: '',
             },
@@ -44,7 +45,12 @@ class Signup_Component extends Component {
         };
         SingUp(options).then(response => {
             this.props.history.push("/login/");
-        })
+        }).catch(error => {
+            console.log(error);
+            this.setState({
+                error_status: error.response.data.title,
+            });
+        });
     } 
     validateEmail(e) {
         const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -63,6 +69,7 @@ class Signup_Component extends Component {
             <>
                 <Container className="login">
                     <div className="name"><h2>Sign In</h2></div>
+                    {this.state.error_status}
                     <Form className="form" onSubmit={(e) => this.handleSubmit(e)}>
                         <Col>
                             <FormGroup>

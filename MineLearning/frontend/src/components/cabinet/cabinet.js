@@ -14,6 +14,7 @@ class Cabinet_Component extends Component {
             email: "",
             bio: "",
             avatar: "",
+            error_status: "",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -35,7 +36,12 @@ class Cabinet_Component extends Component {
                 bio: response.data.bio,
                 avatar: response.data.avatar,
             })
-        })
+        }).catch(error => {
+            console.log(error);
+            this.setState({
+                error_status: error.response.data.title,
+            });
+        });
     }
 
     componentDidMount() {
@@ -51,6 +57,7 @@ class Cabinet_Component extends Component {
                                 <img className="avatar" src={this.state.avatar} />
                             </tr>
                             <tr><a href="/cabinet/" className="changeava">Изменить</a></tr>
+                            {this.state.error_status}
                         </table>
                         
                     </td>

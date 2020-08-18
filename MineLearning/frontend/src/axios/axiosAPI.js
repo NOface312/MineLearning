@@ -26,24 +26,40 @@ axiosInstance.interceptors.response.use(
                 window.location.reload();
             } 
         }*/
-        if (error.response.data.toString() === "Token Broken" && originalRequest.url === 'auth/blacklist/' ) {
-            localStorage.removeItem('access_token');
-            localStorage.removeItem('refresh_token');
-            axiosInstance.defaults.headers['Authorization'] = null;
-            window.location.reload();
+
+        try {
+            if (error.response.data.toString() === "Token Broken" && originalRequest.url === 'auth/blacklist/') {
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+                axiosInstance.defaults.headers['Authorization'] = null;
+                window.location.reload();
+            }
+        } catch (error) {
+            console.log(error)
         }
-        if (error.response.data.code === "token_not_valid" && originalRequest.url !== 'auth/token/refresh/') {
-            localStorage.removeItem('access_token');
-            localStorage.removeItem('refresh_token');
-            axiosInstance.defaults.headers['Authorization'] = null;
-            window.location.reload();
-        } 
-        if (error.response.status === 400 && originalRequest.url === 'auth/token/refresh/') {
-            localStorage.removeItem('access_token');
-            localStorage.removeItem('refresh_token');
-            axiosInstance.defaults.headers['Authorization'] = null;
-            window.location.reload();
+        
+        try {
+            if (error.response.data.code === "token_not_valid" && originalRequest.url !== 'auth/token/refresh/') {
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+                axiosInstance.defaults.headers['Authorization'] = null;
+                window.location.reload();
+            } 
+        } catch (error) {
+            console.log(error)
         }
+        
+        try {
+            if (error.response.status === 400 && originalRequest.url === 'auth/token/refresh/') {
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+                axiosInstance.defaults.headers['Authorization'] = null;
+                window.location.reload();
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
         if (error.response.data.code === "token_not_valid" &&
             error.response.status === 401 &&
             error.response.statusText === "Unauthorized") {

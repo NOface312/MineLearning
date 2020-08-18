@@ -56,32 +56,53 @@ class Courses_Create_Component extends Component {
     handleSubmit(event) {
         event.preventDefault();
         let file = this.state.posterFile;
-        imageUploadApi(file)
-            .then(response => {
-                this.setState({
-                    poster: response.data.secure_url,
-                    posterUploading: false,
-                });
-                let options = {
-                    slug: this.state.slug,
-                    title: this.state.title,
-                    preview: this.state.preview,
-                    poster: this.state.poster,
-                    content: this.state.content,
-                    creator: this.state.creator,
-                };
-                CreateCourse(options).then(response => {
-                    alert("Готово!");
-                })
-            })
-            .catch(error => {
+        if (this.state.posterUploading) {
+            let options = {
+                slug: this.state.slug,
+                title: this.state.title,
+                preview: this.state.preview,
+                poster: this.state.poster,
+                content: this.state.content,
+                creator: this.state.creator,
+            };
+            CreateCourse(options).then(response => {
+                alert("Готово!");
+            }).catch(error => {
                 console.log(error);
                 this.setState({
-                    posterError: 'Image Upload Error',
-                    posterFile: null,
-                    posterUploading: false,
+                    error_status: error.response.data.title,
                 });
             });
+        }
+        else {
+            imageUploadApi(file)
+                .then(response => {
+                    this.setState({
+                        poster: response.data.secure_url,
+                        posterUploading: false,
+                    });
+                    let options = {
+                        slug: this.state.slug,
+                        title: this.state.title,
+                        preview: this.state.preview,
+                        poster: this.state.poster,
+                        content: this.state.content,
+                        creator: this.state.creator,
+                    };
+                    CreateCourse(options).then(response => {
+                        alert("Готово!");
+                    })
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.setState({
+                        posterError: 'Image Upload Error',
+                        error_status: 'Image Upload Error',
+                        posterFile: null,
+                        posterUploading: false,
+                    });
+                });
+        }
     }
 
     componentDidMount() {
@@ -97,6 +118,7 @@ class Courses_Create_Component extends Component {
             <div className="simple-login-container">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <h2>Создание курса</h2>
+                    {this.state.error_status}
                     <div className="row">
                         <div className="col-md-12 form-group">
                             <input name="slug" type="text" placeholder="Метка(для поиска в бд)" className="form-control" value={this.state.slug} onChange={this.handleChange} />

@@ -39,6 +39,8 @@ import Lessons_List_Component from './study/lesson/lessons_list';
 //404
 import NotFound from "./notfound/NotFound"
 
+import About_Component from './about/about'
+
 import Cabinet_Component from "./cabinet/cabinet"
 
 import "./App.css"
@@ -76,7 +78,9 @@ class App extends Component {
                                 <Access_Token_Route exact path={"/cabinet"} component={Cabinet_Component} />
 
                                 <Route exact path={"/login/"} component={ Login_Component } />
-                                <Route exact path={"/signup/"} component={ Signup_Component } />
+                                <Route exact path={"/signup/"} component={Signup_Component} />
+
+                                <Route path="/about/" component={About_Component} />
 
                                 <Route component={NotFound} /> 
                             </Switch>

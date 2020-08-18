@@ -3,6 +3,7 @@ import { Router, Route, Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { CSSTransition } from "react-transition-group";
 import { Logout } from "../../services/api/user/auth/auth_service"
+import { GetUserCurrent } from "./../../services/api/user/edit/edit_service";
 import "./Header.css"
 
 class Header extends React.Component {
@@ -11,11 +12,19 @@ class Header extends React.Component {
                 this.state = {
                         hidden:true,    
                         showList: false,
-                        highlightedHobby: false
+                        highlightedHobby: false,
+                        hiddenAdmin:true,    
+                        showListAdmin: false,
+                        highlightedHobbyAdmin: false,
+                        status: "",
                 }
                 this.changestate = this.changestate.bind(this);
                 this.listSwitch = this.listSwitch.bind(this);
+                this.changestateAdmin = this.changestateAdmin.bind(this);
+                this.listSwitchAdmin = this.listSwitchAdmin.bind(this);
                 this.logout = this.logout.bind(this);
+
+                this.handleGetUserCurrent = this.handleGetUserCurrent.bind(this);
         }
         
         changestate(){
@@ -30,14 +39,43 @@ class Header extends React.Component {
                 }));
               };
 
-        logout() {
+        changestateAdmin(){
+        this.setState(prevState => ({
+                showListAdmin: !prevState.showListAdmin
+                }));
+        }
+                
+        listSwitchAdmin()  {
+                this.setState(state => ({
+                        highlightedHobbyAdmin: !state.highlightedHobbyAdmin
+                }));
+                };
+
+        logout(event) {
                 Logout().then(response => {
-                        location.reload();
+                        this.props.history.push("/login/");
+                        window.location.reload();
                 })
         }
 
+        handleGetUserCurrent() {
+                GetUserCurrent().then(response => {
+                    this.setState({
+                        status: response.data.status,
+                    })
+                })
+            }
+        
+        componentDidMount(){
+                this.handleGetUserCurrent();
+        }
+
     render() {
-        let loggedIn=localStorage.getItem("access_token")
+        let loggedIn=localStorage.getItem("access_token");
+        let isAdmin;
+        if(this.state.status == "Administrator"){
+                isAdmin=true;
+        }
         return (
             <>
             <div className="header-body">
@@ -94,6 +132,40 @@ class Header extends React.Component {
                                 </ul>
                                 </div>
                         </CSSTransition>
+                }
+                {isAdmin && 
+                <>
+                        <button type="submit" className="header-adminpanel" onClick={this.changestateAdmin} >AdminPanel</button>
+                        <CSSTransition
+                                in={this.state.showListAdmin}
+                                timeout={400}
+                                classNames="list-transition-admin"
+                                unmountOnExit
+                                appear
+                                onEntered={this.listSwitchAdmin}
+                                onExit={this.listSwitchAdmin}
+                                >
+                                <div className="list-body-admin">
+                                <ul className="list-admin">
+                                <li className="list-item-admin">
+                                        <form action="/news/create/">
+                                                <button type="submit" className="header-login">Создать новость</button>
+                                        </form>
+                                </li>
+                                <li className="list-item-admin">
+                                        <form action="/courses/create/">
+                                                <button type="submit" className="header-login">Создать курс</button>
+                                        </form>
+                                </li>
+                                <li className="list-item-admin">
+                                        <form action="/lessons/create/">
+                                                <button type="submit" className="header-login">Создать урок</button>
+                                        </form>
+                                </li>
+                                </ul>
+                                </div>
+                        </CSSTransition>
+                </>
                 }
             </div>
             </>

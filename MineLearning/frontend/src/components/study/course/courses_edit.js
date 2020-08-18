@@ -23,7 +23,8 @@ class Courses_Edit_Component extends Component {
             posterFile: null,
             posterError: null,
             posterUploading: false,
-            errors: {}
+            errors: {},
+            error_status: "",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -72,9 +73,28 @@ class Courses_Edit_Component extends Component {
             };
             ChangeCourse(options).then(response => {
                 alert("Готово!");
-            })
+            }).catch(error => {
+                console.log(error);
+                this.setState({
+                    error_status: error.response.data.title,
+                });
+            });
         }
         else {
+            if (this.state.posterUploading) {
+                ChangeCourse(options).then(response => {
+                    alert("Готово!");
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.setState({
+                        error_status: error.response.data.title,
+                    });
+                });
+            }
+            else {
+
+            }
             imageUploadApi(file)
                 .then(response => {
                     this.setState({
@@ -98,6 +118,7 @@ class Courses_Edit_Component extends Component {
                     console.log(error);
                     this.setState({
                         posterError: 'Image Upload Error',
+                        error_status: 'Image Upload Error',
                         posterFile: null,
                         posterUploading: false,
                     });
@@ -129,7 +150,8 @@ class Courses_Edit_Component extends Component {
         return (
             <div className="simple-login-container">
                 <form className="form" onSubmit={this.handleSubmit}>
-                    <h2>Регистрация</h2>
+                    <h2>Изменить Курс</h2>
+                    {this.state.error_status}
                     <div className="row">
                         <div className="col-md-12 form-group">
                             <input name="slug" type="text" placeholder="Метка(для поиска в бд)" className="form-control" value={this.state.slug} onChange={this.handleChange} />

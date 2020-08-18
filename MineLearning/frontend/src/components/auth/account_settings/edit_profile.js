@@ -15,6 +15,7 @@ class Edit_Profile_Component extends Component {
             bio: "",
             new_password: "",
             old_password: "",
+            error_status: "",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -53,7 +54,12 @@ class Edit_Profile_Component extends Component {
                 email: response.data.email,
                 bio: response.data.bio,
             })
-        })
+        }).catch(error => {
+            console.log(error);
+            this.setState({
+                error_status: error.response.data.title,
+            });
+        });
     }
 
     componentDidMount() {
@@ -65,6 +71,7 @@ class Edit_Profile_Component extends Component {
             <div className="simple-login-container">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <h2>Изменить</h2>
+                    {this.state.error_status}
                     <div className="row">
                         <div className="col-md-12 form-group">
                             <input name="name" type="text" placeholder="Имя" className="form-control" value={this.state.name} onChange={this.handleChange} />
