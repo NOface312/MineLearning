@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ua98i-qe8n9t9f!0m2y*(9fx!16rzk+@o6gi1#gw&*p8emne(7'
+SECRET_KEY = 'KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -103,11 +103,11 @@ WSGI_APPLICATION = 'MineLearning.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'coedghgi',
-        'USER': 'coedghgi',
-        'PASSWORD': 'RN-Dw6QM2l8qbEsgRqP5SqC17c_66QPm',
-        'HOST': 'rogue.db.elephantsql.com',
-        'PORT': '5432',
+        'NAME': 'name',
+        'USER': 'user',
+        'PASSWORD': 'password',
+        'HOST': 'host',
+        'PORT': 'port',
     }
 }
 
